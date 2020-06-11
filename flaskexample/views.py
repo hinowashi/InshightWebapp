@@ -8,16 +8,16 @@ from sqlalchemy_utils import database_exists, create_database
 import pandas as pd
 import psycopg2
 
-# Python code to connect to Postgres
-# You may need to modify this based on your OS, 
-# as detailed in the postgres dev setup materials.
-user = 'casanova' #add your Postgres username here
-host = 'localhost'
-dbname = 'birth_db'
-db = create_engine('postgres://%s%s/%s'%(user,host,dbname))
-con = None
-con = psycopg2.connect(database = dbname, user = user)
-
+## Python code to connect to Postgres
+## You may need to modify this based on your OS,
+## as detailed in the postgres dev setup materials.
+#user = 'casanova' #add your Postgres username here
+#host = 'localhost'
+#dbname = 'birth_db'
+#db = create_engine('postgres://%s%s/%s'%(user,host,dbname))
+#con = None
+#con = psycopg2.connect(database = dbname, user = user)
+#
 @app.route('/')
 @app.route('/index')
 #def index():
@@ -67,17 +67,17 @@ con = psycopg2.connect(database = dbname, user = user)
 #   the_result = ModelIt(patient,births)
 #   return render_template("output.html", births = births, the_result = the_result)
 
-@app.route('/inputTest')
+@app.route('/input')
 def addition_input():
-   return render_template("inputTest.html")
+   return render_template("input.html")
 
-@app.route('/outputTest')
+@app.route('/output')
 def addition_output():
    num_one = float(request.args.get('first_number'))
    num_two = float(request.args.get('second_number'))
    distList = analysis(num_one, num_two)
    print(distList)
-   return render_template("outputTest.html", sumofnums = distList)
+   return render_template("output.html", sumofnums = distList)
 
 
 
