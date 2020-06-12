@@ -41,13 +41,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Project name</a>
+        <a class="navbar-brand" href="#">BirdWatch</a>
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
+<!--          <li><a href="#about">About</a></li>-->
+<!--          <li><a href="#contact">Contact</a></li>-->
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -56,23 +56,24 @@
 <div class="container">
 
    <div class="starter-template">
-       <h2>Input Page</h2>
-       <p>Enter some user input</p>
+       <h2>BirdWatch</h2>
+       <p>Welcome to BirdWatch!  BirdWatch is a birding trip planner that guaratees you will be at the right location at the right time to maximize your chances of seen all the birds in your state. A key feature of BirdWatch is that it uses your home location as your home base of operations, giving you a chance to see all the birds without the need of a road trip. BirdWatch will give you a handfull of recomendations of where to be and what to see for each week. For eBird users it can also plan a trip to see state lifers! </p>
    </div>
 
    <div class = "container">
-
+    <p>Enter your home base coordinates.</p>
+    <!--           <p>This infomration can be found using google maps.</p>-->
      <form action="/output" method="GET">
        <div class="form-group">
-         <label for="first_number">First Number:</label>
-         <input type="number" id="first_number" name='first_number' placeholder="0">
+         <label for="first_number">Latitude:</label>
+         <input type="float" id="Lat" name='Lat' placeholder="44">
        </div>
        <div class="form-group">
-         <label for="second_number">First Number:</label>
-         <input type="number" id="second_number" name='second_number' placeholder="0">
+         <label for="second_number">Longitude:</label>
+         <input type="float" id="Lng" name='Lng' placeholder="-110">
        </div>
        <div>
-         <button type="submit" class="btn btn-default btn-lg">Let's add these numbers!</button>
+         <button type="submit" class="btn btn-default btn-lg">Let's create your path!</button>
        </div>
 
      </form>
