@@ -2,5 +2,11 @@ flaskexample/default.cfg
 flaskexample/.DS_Store
 flaskexample/__pycache__
 .DS_Store
-flaskexample/Project
-
+flaskexample/Main.py
+flaskexample/DBScaner.py
+flaskexample/Definition.py
+flaskexample/Itinerary.py
+flaskexample/SetCover.py
+flaskexample/test.py
+flaskexample/Project/*
+flaskexample/Project/.ipynb_checkpoints/*

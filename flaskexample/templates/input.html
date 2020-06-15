@@ -61,16 +61,12 @@
    </div>
 
    <div class = "container">
-    <p>Enter your home base coordinates.</p>
+<!--    <p>Enter your home base coordinates.</p>-->
     <!--           <p>This infomration can be found using google maps.</p>-->
      <form action="/output" method="GET">
        <div class="form-group">
-         <label for="first_number">Latitude:</label>
-         <input type="float" id="Lat" name='Lat' placeholder="44">
-       </div>
-       <div class="form-group">
-         <label for="second_number">Longitude:</label>
-         <input type="float" id="Lng" name='Lng' placeholder="-110">
+         <label for="Address">Type your home city</label><br>
+         <input type="text" id="Address" name='Address' placeholder="Example: Chicago, IL">
        </div>
        <div>
          <button type="submit" class="btn btn-default btn-lg">Let's create your path!</button>
