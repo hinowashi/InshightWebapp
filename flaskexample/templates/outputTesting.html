@@ -23,56 +23,13 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       
-      <!--  ----------------------------->
-      <!--  ----------------------------->
-      <!--  Begining of the google maps-->
-      <!--  ----------------------------->
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-      <script
-         src="https://maps.googleapis.com/maps/api/js?key={{config.GMAPS}}&callback=initMap&libraries=&v=weekly"
-         defer
-         ></script>
-      <style type="text/css">
-         /* Always set the map height explicitly to define the size of the div
-         * element that contains the map. */
-         #map {
-         height: 50%;
-         }
-         /* Optional: Makes the sample page fill the window. */
-         html,
-         body {
-         height: 100%;
-         margin: 0;
-         padding: 0;
+      <style>
+         /* Set the size of the div element that contains the map */
+        #map {
+          height: 400px;  /* The height is 400 pixels */
+          width: 100%;  /* The width is the width of the web page */
          }
       </style>
-      <script>
-         (function(exports) {
-           "use strict";
-         
-           function initMap() {
-             exports.map = new google.maps.Map(document.getElementById("map"), {
-               center: {
-                 lat: {{lat}},
-                 lng: {{lon}}
-               },
-               zoom: 8
-             });
-          marker = new google.maps.Marker({
-             position:{lat:{{lat}},lng:{{lon}}},
-             map:map,
-             label: 'H'
-             });
-          
-           }
-         
-           exports.initMap = initMap;
-         })((this.window = this.window || {}));
-      </script>
-      <!--  ----------------------------->
-      <!--  ----------------------------->
-      <!--  End of the google maps-->
-      <!--  ----------------------------->
       
    </head>
    <body>
@@ -98,19 +55,60 @@
          </div>
       </div>
       <br></br>
-      <div id="map"></div>
-      <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-      <script src="static/js/bootstrap.min.js"></script>
-      </div> <!-- /.container-->
-      <div class="container">
-         <div class="starter-template">
-            <h2>Here is your intinerary, now go bird!</h2>
-            <br>{{sumofnums}}</br></p>
-         </div>
-         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-         <script src="static/js/bootstrap.min.js"></script>
-      </div>
-      <!-- /.container -->
+      <h3>My Google Maps Demo</h3>
+          <!--The div element for the map -->
+          <div id="map"></div>
+          <script>
+      // Initialize and add the map
+      function initMap() {
+        // The location of Uluru
+        var uluru = {lat: {{lat}}, lng: {{lon}}};
+        // The map, centered at Uluru
+        var map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 10, center: uluru});
+        // The marker, positioned at Uluru
+        setMarkers(map);
+      }
+          
+
+      // Data for the markers consisting of a name, a LatLng and a zIndex for the
+      // order in which these markers should display on top of each other.
+      var beaches = {{ loclist|safe }};
+      
+      function setMarkers(map) {
+        // Adds markers to the map.
+
+        // Marker sizes are expressed as a Size of X,Y where the origin of the image
+        // (0,0) is located in the top left of the image.
+
+        // Origins, anchor positions and coordinates of the marker increase in the X
+        // direction to the right and in the Y direction down.
+
+        for (var i = 0; i < beaches.length; i++) {
+          var beach = beaches[i];
+          document.write(beach)
+          var marker = new google.maps.Marker({
+            position: {lat: beach[1], lng: beach[2]},
+            map: map,
+            title: beach[0],
+            label: beach[0]
+          });
+        }
+      }
+        
+          </script>
+          <!--Load the API from the specified URL
+          * The async attribute allows the browser to render the page while the API loads
+          * The key parameter will contain your own API key (which is not needed for this tutorial)
+          * The callback parameter executes the initMap() function
+          -->
+          <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key={{config.GMAPS}}&callback=initMap">
+          </script>
+      
+      
+      
+      
       <!-- Bootstrap core JavaScript
          ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->

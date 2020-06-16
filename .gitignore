@@ -8,5 +8,8 @@ flaskexample/Definition.py
 flaskexample/Itinerary.py
 flaskexample/SetCover.py
 flaskexample/test.py
-flaskexample/Project/*
+flaskexample/Project/.DS_Store
 flaskexample/Project/.ipynb_checkpoints/*
+flaskexample/Project/Definition.py
+flaskexample/Project/SQLgenerator.py
+flaskexample/Project/MySQL setup.ipynb
