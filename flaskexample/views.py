@@ -6,7 +6,7 @@ from sqlalchemy_utils import database_exists, create_database
 import pandas as pd
 import psycopg2
 
-from flaskexample import Main
+from flaskexample.Project import Main
 
 app.config.from_object(__name__)
 
@@ -21,10 +21,12 @@ def output():
    address = request.args.get('Address')
 
    lat, lng = Main.give_lat_lgn(address)
-   dfAll = Main.produce_table()
-   
-   setMat, nTime, n_clusters_, dfCounts = Main.clustering_and_prob(dfAll)
-   outLoc, mapMarkerList, userOut = Main.output_generator(dfCounts, lat, lng, setMat, nTime, n_clusters_)
+#   dfAll = Main.produce_table()
+#
+#   setMat, nTime, n_clusters_, dfCounts = Main.clustering_and_prob(dfAll)
+#   outLoc, mapMarkerList, userOut = Main.output_generator(dfCounts, lat, lng, setMat, nTime, n_clusters_)
+
+   userOut = 'aaa'
    
    return render_template("output.html", sumofnums = userOut, lat = lat, lon = lng)
 

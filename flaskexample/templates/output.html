@@ -72,10 +72,21 @@
       exports.initMap = initMap;
     })((this.window = this.window || {}));
   </script>
-  
 </head>
 
 <body>
+    
+    <p id="demo"></p>
+    
+    <script>
+    function myFunction(arg1, arg2) {
+      this.firstName = arg1;
+      this.lastName  = arg2;
+    }
+
+    var x = new myFunction("John","Doe")
+    document.getElementById("demo").innerHTML = x.firstName;
+    </script>
 
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
