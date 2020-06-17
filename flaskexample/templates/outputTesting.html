@@ -22,15 +22,20 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
-      
-      <style>
-         /* Set the size of the div element that contains the map */
-        #map {
-          height: 400px;  /* The height is 400 pixels */
-          width: 100%;  /* The width is the width of the web page */
+      <style type="text/css">
+         /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+         #map {
+         height: 50%;
+         }
+         /* Optional: Makes the sample page fill the window. */
+         html,
+         body {
+         height: 100%;
+         margin: 0;
+         padding: 0;
          }
       </style>
-      
    </head>
    <body>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -55,60 +60,78 @@
          </div>
       </div>
       <br></br>
-      <h3>My Google Maps Demo</h3>
-          <!--The div element for the map -->
-          <div id="map"></div>
-          <script>
-      // Initialize and add the map
-      function initMap() {
-        // The location of Uluru
-        var uluru = {lat: {{lat}}, lng: {{lon}}};
-        // The map, centered at Uluru
-        var map = new google.maps.Map(
-            document.getElementById('map'), {zoom: 10, center: uluru});
-        // The marker, positioned at Uluru
-        setMarkers(map);
-      }
-          
+      <!--The div element for the map -->
+      <div id="map"></div>
+      <script>
+         // Initialize and add the map
+         function initMap() {
+           // The location of Uluru
+           var uluru = {lat: {{lat}}, lng: {{lon}}};
+           // The map, centered at Uluru
+           var map = new google.maps.Map(
+               document.getElementById('map'), {zoom: 10, center: uluru});
+           // The marker, positioned at Uluru
+           setMarkers(map);
+         }
+         var beaches = {{ loclist|safe }};
+         
+         function setMarkers(map) {
+         
+           for (var i = 0; i < beaches.length; i++) {
+             var beach = beaches[i];
+             var marker = new google.maps.Marker({
+               position: {lat: beach[1], lng: beach[2]},
+               map: map,
+               title: beach[0],
+               label: beach[0]
+             });
+           }
+         }
+           
+             
+      </script>
+      <!--Load the API from the specified URL
+         * The async attribute allows the browser to render the page while the API loads
+         * The key parameter will contain your own API key (which is not needed for this tutorial)
+         * The callback parameter executes the initMap() function
+         -->
+      <script async defer
+         src="https://maps.googleapis.com/maps/api/js?key={{config.GMAPS}}&callback=initMap"></script>
+      <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+      <script src="static/js/bootstrap.min.js"></script>
+      </div> <!-- /.container-->
+      
+      
+      
+      <div class="container">
+        <div class="starter-template">
+          <h3>Results:</h3>
+          <p class="lead">Below is the result of your query.<br> You just took user input and looked up the information. Now we need to expand the functionality!</p>
+        </div>
 
-      // Data for the markers consisting of a name, a LatLng and a zIndex for the
-      // order in which these markers should display on top of each other.
-      var beaches = {{ loclist|safe }};
-      
-      function setMarkers(map) {
-        // Adds markers to the map.
+        <table class="table table-hover">
+        <tr><th>index</th><th>Attendant</th><th>Birth Month</th></tr>
+        {% for birth in births %}
+        <tr><td>{{ birth['index'] }}</td><td>{{ birth['attendant']}}</td><td> {{ birth['birth_month'] }}</td></tr>
+        {% endfor %}
+        </table>
 
-        // Marker sizes are expressed as a Size of X,Y where the origin of the image
-        // (0,0) is located in the top left of the image.
 
-        // Origins, anchor positions and coordinates of the marker increase in the X
-        // direction to the right and in the Y direction down.
-
-        for (var i = 0; i < beaches.length; i++) {
-          var beach = beaches[i];
-          document.write(beach)
-          var marker = new google.maps.Marker({
-            position: {lat: beach[1], lng: beach[2]},
-            map: map,
-            title: beach[0],
-            label: beach[0]
-          });
-        }
-      }
-        
-          </script>
-          <!--Load the API from the specified URL
-          * The async attribute allows the browser to render the page while the API loads
-          * The key parameter will contain your own API key (which is not needed for this tutorial)
-          * The callback parameter executes the initMap() function
-          -->
-          <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key={{config.GMAPS}}&callback=initMap">
-          </script>
+       </div><!-- /.container -->
       
       
       
       
+      
+      
+      <div class="container">
+         <div class="starter-template">
+            <h2>Here is your intinerary, now go bird!</h2>
+            <br>{{sumofnums}}</br></p>
+         </div>
+         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+         <script src="static/js/bootstrap.min.js"></script>
+      </div>
       <!-- Bootstrap core JavaScript
          ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
