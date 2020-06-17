@@ -70,3 +70,29 @@ def dic_user_ouput_maker(df, rawLocList, nTime, nLoc):
             userOut[key] = [placeNew]
             
     return userOut
+    
+def table_creator(dfCounts, locList, setList, nTime, nLoc):
+    locMat = np.linspace(1,nTime*nLoc,nTime*nLoc).reshape(nTime,nLoc)
+    numLoc = len(locList)
+    arrayWeeks = np.empty((numLoc), dtype = int)
+    arrayLocName = np.empty((numLoc), dtype = object)
+    arrayBirds = np.empty((numLoc), dtype = object)
+    arrayLat = np.empty((numLoc))
+    arrayLng = np.empty((numLoc))
+    for i, element in enumerate(locList):
+        week,loc = np.where(locMat == element)
+        arrayWeeks[i] = int(week[0]+1)
+        arrayLocName[i] = dfCounts.loc[dfCounts['db_cluster'] == loc[0]].iloc[0]['locality']
+        arrayLat[i] = dfCounts.loc[dfCounts['db_cluster'] == loc[0]].iloc[0]['latitude']
+        arrayLng[i] = dfCounts.loc[dfCounts['db_cluster'] == loc[0]].iloc[0]['longitude']
+        arrayBirds[i] = ', '.join(list(setList[i]))
+    dataTable = pd.DataFrame({'Week': arrayWeeks,
+                  'Place': arrayLocName,
+                  'Birds': arrayBirds,
+                  'Lat': arrayLat,
+                  'Lgn': arrayLng})
+    dataTable.sort_values(by=['Week'], inplace=True)
+    dataTable = dataTable.reset_index()
+    dataTable.drop(['index'], axis=1, inplace=True)
+    
+    return dataTable

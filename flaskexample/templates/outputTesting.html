@@ -103,22 +103,9 @@
       
       
       
-      <div class="container">
-        <div class="starter-template">
-          <h3>Results:</h3>
-          <p class="lead">Below is the result of your query.<br> You just took user input and looked up the information. Now we need to expand the functionality!</p>
-        </div>
-
-        <table class="table table-hover">
-        <tr><th>index</th><th>Attendant</th><th>Birth Month</th></tr>
-        {% for birth in births %}
-        <tr><td>{{ birth['index'] }}</td><td>{{ birth['attendant']}}</td><td> {{ birth['birth_month'] }}</td></tr>
-        {% endfor %}
-        </table>
+   
 
 
-       </div><!-- /.container -->
-      
       
       
       
@@ -127,8 +114,15 @@
       <div class="container">
          <div class="starter-template">
             <h2>Here is your intinerary, now go bird!</h2>
-            <br>{{sumofnums}}</br></p>
+<!--            <br>{{sumofnums}}</br></p>-->
+         <table class="table table-hover">
+         <tr><th>Week Number</th><th>Location Name</th><th>Bird Species</th></tr>
+         {% for _,row in tableInfo.iterrows() %}
+         <tr><td>{{ row['Week'] }}</td><td><a href = "https://www.google.com/maps/dir/?api=1&orgin={{lat}},{{lon}}&destination={{ row['Lat'] }},{{ row['Lgn'] }}"> {{ row['Place']}}</a></td><td> {{ row['Birds'] }}</td></tr>
+         {% endfor %}
+         </table>
          </div>
+         
          <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
          <script src="static/js/bootstrap.min.js"></script>
       </div>
@@ -139,3 +133,4 @@
       <script src="static/js/bootstrap.min.js"></script>
    </body>
 </html>
+

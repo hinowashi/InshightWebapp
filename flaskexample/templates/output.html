@@ -103,7 +103,21 @@
       <div class="container">
          <div class="starter-template">
             <h2>Here is your intinerary, now go bird!</h2>
-            <br>{{sumofnums}}</br></p>
+            <!--            <br>{{sumofnums}}</br></p>-->
+            <table class="table table-hover">
+               <tr>
+                  <th>Week Number</th>
+                  <th>Location Name</th>
+                  <th>Bird Species</th>
+               </tr>
+               {% for _,row in tableInfo.iterrows() %}
+               <tr>
+                  <td>{{ row['Week'] }}</td>
+                  <td><a href = "https://www.google.com/maps/dir/?api=1&orgin={{lat}},{{lon}}&destination={{ row['Lat'] }},{{ row['Lgn'] }}"> {{ row['Place']}}</a></td>
+                  <td> {{ row['Birds'] }}</td>
+               </tr>
+               {% endfor %}
+            </table>
          </div>
          <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
          <script src="static/js/bootstrap.min.js"></script>

@@ -142,9 +142,11 @@ def output_generator(dfCounts, userlat, userlgn, setMat, nTime, n_clusters_):
     setList, locList = SetCover.set_cover_weighted_greedy(Universe, ToMakeUniverse,list(distMat.flatten()))
     outLoc = Itinerary.location_list_maker(dfCounts,locList, nTime, n_clusters_)
     mapMarkerList = Itinerary.google_map_marker_list(dfCounts, outLoc)
-    userOut = Itinerary.dic_user_ouput_maker(dfCounts,locList,nTime, n_clusters_)
+#    userOut = Itinerary.dic_user_ouput_maker(dfCounts,locList,nTime, n_clusters_)
     
-    return outLoc, mapMarkerList, userOut
+    dataTable = Itinerary.table_creator(dfCounts, locList, setList, nTime, n_clusters_)
+    
+    return mapMarkerList, dataTable
 
 #    return 1, 2, 3
 
