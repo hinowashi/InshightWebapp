@@ -32,7 +32,3 @@ def outputTesting():
       mapMarkerList, dataTable = Main.output_generator(dfCounts, lat, lng, setMat, nTime, n_clusters_)
       
       return render_template("output.html", lat = lat, lon = lng, loclist = json.dumps(mapMarkerList), tableInfo = dataTable)
-    
-
-
-
