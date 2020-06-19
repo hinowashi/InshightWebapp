@@ -7,7 +7,6 @@
 
 
 import numpy as np
-import geopandas as gpd
 import pickle
 import googlemaps
 import pandas as pd
