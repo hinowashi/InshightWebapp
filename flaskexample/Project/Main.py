@@ -27,10 +27,10 @@ def save_fig(name):
 
 
 def give_lat_lgn(userHomeBase):
-#    gmaps = googlemaps.Client(key=Definition.GOOGLEKEY)
-#    geocode_result = gmaps.geocode('{}'.format(userHomeBase))
+    gmaps = googlemaps.Client(key=Definition.GOOGLEKEY)
+    geocode_result = gmaps.geocode('{}'.format(userHomeBase))
 #    pickle.dump(geocode_result, open("./geocode_result.p", "wb" ))
-    geocode_result = pickle.load(open("./geocode_result.p", "rb" ))
+#    geocode_result = pickle.load(open("./geocode_result.p", "rb" ))
     state_long = geocode_result[0]['address_components'][2]['long_name']
     state_short = geocode_result[0]['address_components'][2]['short_name']
     lat = geocode_result[0]['geometry']['location']['lat']
@@ -100,34 +100,34 @@ def output_generator(dfCounts, userlat, userlgn, setMat, nTime, n_clusters_):
     '''
     Choose between this and the other seccion.  For test, use the other one, it does not use google dist function.
     '''
-#    gmaps = googlemaps.Client(key='{}'.format(Definition.GOOGLEKEY))
-#    coorHotspot = np.empty((n_clusters_+1, 2))
-#    coorHotspot[:,0], coorHotspot[:,1] = dfCounts['longitude'],dfCounts['latitude']
-#
-#    distMat = np.empty((nTime,n_clusters_))
-#    countBreak = divmod(n_clusters_,100)
-#
-#    for i in range(0,countBreak[0]):
-#        distanceMatGmaps = gmaps.distance_matrix(origins = (userlat, userlgn),
-#                                              destinations=list(coorHotspot[100*i:100*(i+1)]),
-#                                              mode = 'driving', units = 'metric')
-#        for j in range(100*i,100*(i+1)):
-#            jj = j - 100*i
-#            try:
-#                distMat[:,j] = distanceMatGmaps['rows'][0]['elements'][jj]['duration']['value']/3600
-#            except KeyError:
-#                distMat[:,j] = 100
-#
-#    distanceMatGmaps = gmaps.distance_matrix(origins = (userlat, userlgn),
-#                                              destinations=list(coorHotspot[countBreak[0]*100:]),
-#                                              mode = 'driving', units = 'metric')
-#
-#    for j in range(countBreak[0]*100,countBreak[0]*100+countBreak[1]):
-#        jj = j - countBreak[0]*100
-#        try:
-#            distMat[:,j] = distanceMatGmaps['rows'][0]['elements'][jj]['duration']['value']/3600
-#        except KeyError:
-#            distMat[:,j] = 100
+    gmaps = googlemaps.Client(key='{}'.format(Definition.GOOGLEKEY))
+    coorHotspot = np.empty((n_clusters_+1, 2))
+    coorHotspot[:,0], coorHotspot[:,1] = dfCounts['longitude'],dfCounts['latitude']
+
+    distMat = np.empty((nTime,n_clusters_))
+    countBreak = divmod(n_clusters_,100)
+
+    for i in range(0,countBreak[0]):
+        distanceMatGmaps = gmaps.distance_matrix(origins = (userlat, userlgn),
+                                              destinations=list(coorHotspot[100*i:100*(i+1)]),
+                                              mode = 'driving', units = 'metric')
+        for j in range(100*i,100*(i+1)):
+            jj = j - 100*i
+            try:
+                distMat[:,j] = distanceMatGmaps['rows'][0]['elements'][jj]['duration']['value']/3600
+            except KeyError:
+                distMat[:,j] = 100
+
+    distanceMatGmaps = gmaps.distance_matrix(origins = (userlat, userlgn),
+                                              destinations=list(coorHotspot[countBreak[0]*100:]),
+                                              mode = 'driving', units = 'metric')
+
+    for j in range(countBreak[0]*100,countBreak[0]*100+countBreak[1]):
+        jj = j - countBreak[0]*100
+        try:
+            distMat[:,j] = distanceMatGmaps['rows'][0]['elements'][jj]['duration']['value']/3600
+        except KeyError:
+            distMat[:,j] = 100
 #
 #    pickle.dump(distMat, open("./distMat.p", "wb" ))
 #
@@ -136,7 +136,7 @@ def output_generator(dfCounts, userlat, userlgn, setMat, nTime, n_clusters_):
     #==========================================================================
     #==========================================================================
 
-    distMat = np.random.rand(nTime*n_clusters_).reshape((nTime,n_clusters_))
+#    distMat = np.random.rand(nTime*n_clusters_).reshape((nTime,n_clusters_))
 #    distMat = pickle.load(open("./distMat.p", "rb" ))
     ToMakeUniverse = list(setMat.flatten())
 #    print(ToMakeUniverse)
